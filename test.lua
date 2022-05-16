@@ -104,7 +104,7 @@ local Initialize = function(Side)
         else
             v.ChildAdded:Connect(function(ln)
                 repeat task.wait() until ln.AbsolutePosition.Y+85 <= Y
-                game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[ln.Parent.Name]],false,nil)
+                game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[ln.Parent.Name]],false,nil)
                 ln:Destroy() 
             end)
         end
@@ -114,7 +114,7 @@ local Initialize = function(Side)
             and ArrowGui():FindFirstChild'Title'
         and ArrowGui().Title.Text:find'0:01'
         for i,v in next,Keys do
-            game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[v],false,nil)
+            game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[v],false,nil)
         end
     end)
 end
