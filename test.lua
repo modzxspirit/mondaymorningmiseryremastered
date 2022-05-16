@@ -114,7 +114,9 @@ local Initialize = function(Side)
             and ArrowGui():FindFirstChild'Title'
         and ArrowGui().Title.Text:find'0:00'
         for i,v in next,Keys do
+            game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[v],false,nil)
             game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[v],false,nil)
+             
         end
     end)
 end
