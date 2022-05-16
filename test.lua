@@ -78,7 +78,7 @@ local Initialize = function(Side)
                 if library.flags.AP and Keys[_.Parent.Name]~=nil then
                     game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
                     if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
-                        game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
+                        game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
                     end
                 end
             end)
@@ -88,7 +88,7 @@ local Initialize = function(Side)
                 if library.flags.AP and Keys[_.Parent.Name]~=nil then
                     game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
                     if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
-                        game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
+                        game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
                     end
                 end
             end)
