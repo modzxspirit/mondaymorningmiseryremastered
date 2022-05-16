@@ -97,13 +97,13 @@ local Initialize = function(Side)
     for i,v in pairs(ArrowGui()[Side].LongNotes:children())do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(ln)
-                repeat task.wait() until ln.AbsolutePosition.Y-85 >= Y
+                repeat task.wait() until ln.AbsolutePosition.Y-95 >= Y
                 game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[ln.Parent.Name]],false,nil)
                 ln:Destroy() 
             end)
         else
             v.ChildAdded:Connect(function(ln)
-                repeat task.wait() until ln.AbsolutePosition.Y+85 <= Y
+                repeat task.wait() until ln.AbsolutePosition.Y+95 <= Y
                 game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[ln.Parent.Name]],false,nil)
                 ln:Destroy() 
             end)
@@ -112,7 +112,7 @@ local Initialize = function(Side)
     task.spawn(function()
         repeat wait() until ArrowGui()
             and ArrowGui():FindFirstChild'Title'
-        and ArrowGui().Title.Text:find'0:01'
+        and ArrowGui().Title.Text:find'0:00'
         for i,v in next,Keys do
             game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[v],false,nil)
         end
