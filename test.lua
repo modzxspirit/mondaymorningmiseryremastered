@@ -17,7 +17,6 @@ end
 end})
 Window:AddLabel({text = "Autoplayer by lucit#6896"})
 Window:AddLabel({text = "UI and configs by cup#7282"})
-end
 Window:AddBind({ text = 'Menu toggle', key = Enum.KeyCode.Delete, callback = function() library:Close() end })
 end
 
