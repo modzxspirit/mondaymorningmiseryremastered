@@ -6,6 +6,7 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/wally
 local Window = library:CreateWindow("CoolUI MMM AP")
 Window:AddToggle({text = "Toggle autoplayer", flag = "AP" })
 Window:AddBind({ text = 'Menu toggle', key = Enum.KeyCode.Delete, callback = function() library:Close() end })
+end
 Window:AddButton({text = "Destroy Gui", callback = function()pcall(function()game:GetService("CoreGui").ScreenGui:Destroy()end)end})
 Window:AddButton({text = "Copy discord invite",callback=function()
 if setclipboard then
