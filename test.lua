@@ -1,6 +1,6 @@
 --no skid pls
 local userInputService = game:GetService('UserInputService')
-local fireSignal, rollChance do
+local fireSignal do
     -- updated for script-ware or whatever
     -- attempted to update for krnl 
     local set_identity = (type(syn) == 'table' and syn.set_thread_identity) or setidentity or setthreadcontext
