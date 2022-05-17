@@ -76,7 +76,7 @@ local Initialize = function(Side)
             v.ChildAdded:Connect(function(_)
                 repeat task.wait() until _.AbsolutePosition.Y >= math.floor(Y)
                 if library.flags.AP and Keys[_.Parent.Name]~=nil then
-                    game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
+                    game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
                     if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
                         game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
  
@@ -101,14 +101,14 @@ local Initialize = function(Side)
             v.ChildAdded:Connect(function(ln)
                 repeat task.wait() until ln.AbsolutePosition.Y-75 >= Y
                 game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[ln.Parent.Name]],false,nil)
-                game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[ln.Parent.Name]],false,nil)
+                
                 ln:Destroy() 
             end)
         else
             v.ChildAdded:Connect(function(ln)
                 repeat task.wait() until ln.AbsolutePosition.Y+75 <= Y
                 game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[ln.Parent.Name]],false,nil)
-                game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[ln.Parent.Name]],false,nil)
+                
                 ln:Destroy() 
             end)
         end
