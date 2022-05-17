@@ -1,11 +1,12 @@
---no skid pls
-
-
-local Notify=function(Title,Text,Duration)game.StarterGui:SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end --useless XD
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua"))() --OMG IP LOGGER!!!!
 local Window = library:CreateWindow("Monday Morning Misery")
-Window:AddToggle({text = "Toggle autoplayer", flag = "AP" })
-Window:AddButton({text = "Destroy Gui", callback = function()pcall(function()game:GetService("CoreGui").ScreenGui:Destroy()end)end})
+local Folder = Window:AddFolder("Autoplayer") do
+local toggle = Folder:AddToggle({text = "Toggle autoplayer", flag = "AP" })
+Folder:AddBind({ text = 'Autoplayer toggle', flag = 'AutoPlayerToggle', key = Enum.KeyCode.End, callback = function()
+                toggle:SetState(not toggle.state)
+            end })
+
+Folder:AddButton({text = "Destroy Gui", callback = function()pcall(function()game:GetService("CoreGui").ScreenGui:Destroy()end)end})
 Window:AddBind({ text = 'Menu toggle', key = Enum.KeyCode.Delete, callback = function() library:Close() end })
 
 library:Init()
@@ -109,4 +110,5 @@ MainGui.ChildAdded:Connect(function(_)
 end)
 if ArrowGui()and Background()then
   Initialize(Side())
+end
 end
