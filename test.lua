@@ -1,5 +1,23 @@
 --no skid pls
 local userInputService = game:GetService('UserInputService')
+local fireSignal, rollChance do
+    -- updated for script-ware or whatever
+    -- attempted to update for krnl 
+    local set_identity = (type(syn) == 'table' and syn.set_thread_identity) or setidentity or setthreadcontext
+    function fireSignal(target, signal, ...)    
+        -- getconnections with InputBegan / InputEnded does not work without setting Synapse to the game's context level
+        set_identity(2) 
+        for _, signal in next, getconnections(signal) do
+            if type(signal.Function) == 'function' and islclosure(signal.Function) then
+                local scr = rawget(getfenv(signal.Function), 'script')
+                if scr == target then
+                    pcall(signal.Function, ...)
+                end
+            end
+        end
+        set_identity(7)
+    end
+
 local g = "https://discord.gg/QdaJDDvRHN"
 local Notify=function(Title,Text,Duration)game.StarterGui:SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end --useless XD
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua"))() --OMG IP LOGGER!!!!
