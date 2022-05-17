@@ -6,17 +6,6 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/wally
 local Window = library:CreateWindow("CoolUI MMM AP")
 Window:AddToggle({text = "Toggle autoplayer", flag = "AP" })
 Window:AddButton({text = "Destroy Gui", callback = function()pcall(function()game:GetService("CoreGui").ScreenGui:Destroy()end)end})
-Window:AddButton({text = "Copy discord invite",callback=function()
-if setclipboard then
-    Notify("Success","Discord invite is in your clipboard")
-    setclipboard(g)
-else
-    Notify("","Exploit doesn't support 'setclipboard', see invite in F9 menu")
-    print("\n\n== DISCORD INVITE ==\n" .. g .. "\n====================")
-end
-end})
-Window:AddLabel({text = "Autoplayer by lucit#6896"})
-Window:AddLabel({text = "UI and configs by cup#7282"})
 Window:AddBind({ text = 'Menu toggle', key = Enum.KeyCode.Delete, callback = function() library:Close() end })
 
 library:Init()
