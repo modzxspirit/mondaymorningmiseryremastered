@@ -8,7 +8,6 @@ Window:AddToggle({text = "Toggle autoplayer", flag = "AP" })
 Window:AddButton({text = "Destroy Gui", callback = function()pcall(function()game:GetService("CoreGui").ScreenGui:Destroy()end)end})
 Window:AddButton({text = "Copy discord invite",callback=function()
 Window:AddBind({ text = 'Menu toggle', key = Enum.KeyCode.Delete, callback = function() library:Close() end })
-end            
 if setclipboard then
     Notify("Success","Discord invite is in your clipboard")
     setclipboard(g)
