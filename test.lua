@@ -1,5 +1,5 @@
 --no skid pls
-local userInputService = game:GetService('UserInputService')
+
 local g = "https://discord.gg/QdaJDDvRHN"
 local Notify=function(Title,Text,Duration)game.StarterGui:SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end --useless XD
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua"))() --OMG IP LOGGER!!!!
@@ -17,6 +17,8 @@ end
 end})
 Window:AddLabel({text = "Autoplayer by lucit#6896"})
 Window:AddLabel({text = "UI and configs by cup#7282"})
+Window:AddBind({ text = 'Menu toggle', key = Enum.KeyCode.Delete, callback = function() library:Close() end })
+end
 
 library:Init()
 
@@ -77,9 +79,9 @@ local Initialize = function(Side)
             v.ChildAdded:Connect(function(_)
                 repeat task.wait() until _.AbsolutePosition.Y>=Y
                 if library.flags.AP and Keys[_.Parent.Name]~=nil then
-                    game:GetService'UserInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
+                    game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
                     if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
-                        game:GetService'UserInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
+                        game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
                     end
                 end
             end)
@@ -87,9 +89,9 @@ local Initialize = function(Side)
             v.ChildAdded:Connect(function(_)
                 repeat task.wait() until _.AbsolutePosition.Y<=Y
                 if library.flags.AP then
-                    game:GetService'UserInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
+                    game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
                     if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
-                        game:GetService'UserInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
+                        game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
                     end
                 end
             end)
@@ -99,13 +101,13 @@ local Initialize = function(Side)
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(sustainNote)
                 repeat task.wait() until sustainNote.Visible==false
-                game:GetService'UserInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[sustainNote.Parent.Name]],false,nil)
+                game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[sustainNote.Parent.Name]],false,nil)
                 sustainNote:Destroy() 
             end)
         else
             v.ChildAdded:Connect(function(sustainNote)
                 repeat task.wait() until sustainNote.Visible==false
-                game:GetService'UserInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[sustainNote.Parent.Name]],false,nil)
+                game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[sustainNote.Parent.Name]],false,nil)
                 sustainNote:Destroy() 
             end)
         end
