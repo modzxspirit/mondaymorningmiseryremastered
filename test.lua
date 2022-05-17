@@ -5,8 +5,6 @@ local Notify=function(Title,Text,Duration)game.StarterGui:SetCore("SendNotificat
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua"))() --OMG IP LOGGER!!!!
 local Window = library:CreateWindow("CoolUI MMM AP")
 Window:AddToggle({text = "Toggle autoplayer", flag = "AP" })
-Window:AddBind({ text = 'Menu toggle', key = Enum.KeyCode.Delete, callback = function() library:Close() end })
-end
 Window:AddButton({text = "Destroy Gui", callback = function()pcall(function()game:GetService("CoreGui").ScreenGui:Destroy()end)end})
 Window:AddButton({text = "Copy discord invite",callback=function()
 if setclipboard then
@@ -19,6 +17,9 @@ end
 end})
 Window:AddLabel({text = "Autoplayer by lucit#6896"})
 Window:AddLabel({text = "UI and configs by cup#7282"})
+end
+Window:AddBind({ text = 'Menu toggle', key = Enum.KeyCode.Delete, callback = function() library:Close() end })
+end
 
 library:Init()
 
