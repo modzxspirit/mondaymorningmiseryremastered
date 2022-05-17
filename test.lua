@@ -7,6 +7,8 @@ local Window = library:CreateWindow("CoolUI MMM AP")
 Window:AddToggle({text = "Toggle autoplayer", flag = "AP" })
 Window:AddButton({text = "Destroy Gui", callback = function()pcall(function()game:GetService("CoreGui").ScreenGui:Destroy()end)end})
 Window:AddButton({text = "Copy discord invite",callback=function()
+Window:AddBind({ text = 'Menu toggle', key = Enum.KeyCode.Delete, callback = function() library:Close() end })
+end            
 if setclipboard then
     Notify("Success","Discord invite is in your clipboard")
     setclipboard(g)
@@ -17,8 +19,6 @@ end
 end})
 Window:AddLabel({text = "Autoplayer by lucit#6896"})
 Window:AddLabel({text = "UI and configs by cup#7282"})
-Window:AddBind({ text = 'Menu toggle', key = Enum.KeyCode.Delete, callback = function() library:Close() end })
-end
 
 library:Init()
 
