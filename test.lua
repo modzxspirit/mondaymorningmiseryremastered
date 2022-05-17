@@ -19,7 +19,7 @@ Window:AddLabel({text = "Autoplayer by lucit#6896"})
 Window:AddLabel({text = "UI and configs by cup#7282"})
 Window:AddBind({ text = 'Menu toggle', key = Enum.KeyCode.Delete, callback = function() library:Close() end })
 end
-
+end
 library:Init()
 
 local Client = game:GetService'Players'.LocalPlayer
