@@ -79,25 +79,9 @@ local Initialize = function(Side)
             v.ChildAdded:Connect(function(_)
                 repeat task.wait() until _.AbsolutePosition.Y<=Y
                 if library.flags.AP then
-                    RunSignal(InputService.InputBegan, { KeyCode = Enum.KeyCode[Keys[sustainNote.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
+                    RunSignal(InputService.InputBegan, { KeyCode = Enum.KeyCode[Keys[_.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
                     if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
-                        RunSignal(InputService.InputEnded, { KeyCode = Enum.KeyCode[Keys[sustainNote.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
-                    end
-                end
-            end)
-        end
-    end
-    for i,v in pairs(GameUI()[Side].LongNotes:children())do
-        if ScrollType(Side)=="Downscroll"then
-            v.ChildAdded:Connect(function(sustainNote)
-                repeat task.wait() until sustainNote.Visible==false
-                RunSignal(InputService.InputEnded, { KeyCode = Enum.KeyCode[Keys[sustainNote.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
-                sustainNote:Destroy() 
-            end)
-        else
-            v.ChildAdded:Connect(function(sustainNote)
-                repeat task.wait() until sustainNote.Visible==false
-                RunSignal(InputService.InputEnded, { KeyCode = Enum.KeyCode[Keys[sustainNote.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
+                        RunSignal(InputService.InputEnded, { KeyCode = Enum.KeyCode[Keys[_.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
                     end
                 end
             end)
@@ -107,13 +91,13 @@ local Initialize = function(Side)
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(sustainNote)
                 repeat task.wait() until sustainNote.Visible==false
-                game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[sustainNote.Parent.Name]],false,nil)
+                 RunSignal(InputService.InputEnded, { KeyCode = Enum.KeyCode[Keys[sustainNote.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
                 sustainNote:Destroy() 
             end)
         else
             v.ChildAdded:Connect(function(sustainNote)
                 repeat task.wait() until sustainNote.Visible==false
-                game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[sustainNote.Parent.Name]],false,nil)
+                 RunSignal(InputService.InputEnded, { KeyCode = Enum.KeyCode[Keys[sustainNote.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
                 sustainNote:Destroy() 
             end)
         end
