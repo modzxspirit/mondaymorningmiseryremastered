@@ -119,7 +119,7 @@ function RunSignal(signal, ...)
         if type(signal.Function) == 'function' and is_lclosure(signal.Function) then
             local scr = rawget(getfenv(signal.Function), 'script')
             for _, module in next, getloadedmodules() do
-                if module.Name == 'ConsoleHandler' then
+                if module.Name == 'Connection' then
                     pcall(signal.Function, ...)
                     break
                 end
