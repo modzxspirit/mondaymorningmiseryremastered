@@ -1,4 +1,4 @@
-local InputService = game:GetService("UserInputService")
+https://github.com/modzxspirit/mondaymorningmiseryremastered/blob/main/bru.lualocal InputService = game:GetService("UserInputService")
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua"))() --OMG IP LOGGER!!!!
 local Window = library:CreateWindow("Monday Morning Misery")
 local Folder = Window:AddFolder("Autoplayer") do
@@ -32,7 +32,7 @@ local Side = function()
         end
     end
 end
-local ArrowGui= function()
+local GameUI= function()
   local AG
   for _,v in pairs(MainGui:GetDescendants())do
     if v.Name == "GameUI"then AG=v end
@@ -40,8 +40,8 @@ local ArrowGui= function()
   return AG
 end
 local FakeContainer=function(sd)
-  if ArrowGui()~=nil and ArrowGui():FindFirstChild(sd) then
-    for i,v in next,ArrowGui()[sd]:GetDescendants()do
+  if GameUI()~=nil and GameUI():FindFirstChild(sd) then
+    for i,v in next,GameUI()[sd]:GetDescendants()do
       if v.Name=='FakeContainer'then return v end
     end
   else
