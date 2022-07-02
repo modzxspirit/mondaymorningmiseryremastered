@@ -69,9 +69,9 @@ local Initialize = function(Side)
             v.ChildAdded:Connect(function(_)
                 repeat task.wait() until _.AbsolutePosition.Y>=Y
                 if library.flags.AP and Keys[_.Parent.Name]~=nil then
-                    RunSignal(InputService.InputBegan, { KeyCode = Enum.KeyCode[Keys[sustainNote.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
+                    RunSignal(InputService.InputBegan, { KeyCode = Enum.KeyCode[Keys[_.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
                     if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
-                        RunSignal(InputService.InputEnded, { KeyCode = Enum.KeyCode[Keys[sustainNote.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
+                        RunSignal(InputService.InputEnded, { KeyCode = Enum.KeyCode[Keys[_.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
                     end
                 end
             end)
@@ -120,7 +120,7 @@ function RunSignal(signal, ...)
         if type(signal.Function) == 'function' and is_lclosure(signal.Function) then
             local scr = rawget(getfenv(signal.Function), 'script')
             for _, module in next, getloadedmodules() do
-                if module.Name == 'NoteGame' then
+                if module.Name == 'ConsoleHandler' then
                     pcall(signal.Function, ...)
                     break
                 end
