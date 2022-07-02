@@ -1,22 +1,14 @@
---no skid pls
+local InputService = game:GetService("UserInputService")
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua"))() --OMG IP LOGGER!!!!
+local Window = library:CreateWindow("Monday Morning Misery")
+local Folder = Window:AddFolder("Autoplayer") do
+local toggle = Folder:AddToggle({text = "Toggle autoplayer", flag = "AP" })
+Folder:AddBind({ text = 'Autoplayer toggle', flag = 'AutoPlayerToggle', key = Enum.KeyCode.End, callback = function()
+                toggle:SetState(not toggle.state)
+            end })
 
-local g = "https://discord.gg/QdaJDDvRHN"
-local Notify=function(Title,Text,Duration)game.StarterGui:SetCore("SendNotification",{Title=Title,Text=Text,Duration=Duration or 1})end
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua"))()
-local Window = library:CreateWindow("CoolUI MMM AP")
-Window:AddToggle({text = "Toggle autoplayer", flag = "AP" })
-Window:AddButton({text = "Destroy Gui", callback = function()pcall(function()game:GetService("CoreGui").ScreenGui:Destroy()end)end})
-Window:AddButton({text = "Copy discord invite",callback=function()
-if setclipboard then
-    Notify("Success","Discord invite is in your clipboard")
-    setclipboard(g)
-else
-    Notify("","Exploit doesn't support 'setclipboard', see invite in F9 menu")
-    print("\n\n== DISCORD INVITE ==\n" .. g .. "\n====================")
-end
-end})
-Window:AddLabel({text = "Autoplayer by lucit#6896"})
-Window:AddLabel({text = "UI and configs by cup#7282"})
+Folder:AddButton({text = "Destroy Gui", callback = function()pcall(function()game:GetService("CoreGui").ScreenGui:Destroy()end)end})
+Window:AddBind({ text = 'Menu toggle', key = Enum.KeyCode.Delete, callback = function() library:Close() end })
 
 library:Init()
 
@@ -68,27 +60,28 @@ local Initialize = function(Side)
     repeat wait()until ArrowGui()
     local Arrows = ArrowGui():WaitForChild(Side)
     repeat wait()until #Arrows:WaitForChild'Notes':children()>0
-    repeat wait()until FakeContainer(Side) and Arrows.Notes and #Arrows.Notes:children()>0
+    repeat wait()until FakeContainer(Side)and Arrows.Notes and #Arrows.Notes:children()>0
+    --wait until can be ran
     local Keys = Controls[#Arrows.Notes:children()]
     local Y = FakeContainer(Side).Down.AbsolutePosition.Y
     for i,v in pairs(Arrows.Notes:children())do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(_)
-                repeat task.wait() until _.AbsolutePosition.Y >= math.floor(Y)
+                repeat task.wait() until _.AbsolutePosition.Y>=Y
                 if library.flags.AP and Keys[_.Parent.Name]~=nil then
-                    game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
+                    RunSignal(InputService.InputBegan, { KeyCode = Enum.KeyCode[Keys[sustainNote.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
                     if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
-                        game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
+                        RunSignal(InputService.InputEnded, { KeyCode = Enum.KeyCode[Keys[sustainNote.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
                     end
                 end
             end)
         else
             v.ChildAdded:Connect(function(_)
-                repeat task.wait() until _.AbsolutePosition.Y <= math.ceil(Y)
-                if library.flags.AP and Keys[_.Parent.Name]~=nil then
-                    game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
+                repeat task.wait() until _.AbsolutePosition.Y<=Y
+                if library.flags.AP then
+                    RunSignal(InputService.InputBegan, { KeyCode = Enum.KeyCode[Keys[sustainNote.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
                     if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
-                        game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
+                        RunSignal(InputService.InputEnded, { KeyCode = Enum.KeyCode[Keys[sustainNote.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
                     end
                 end
             end)
@@ -96,27 +89,19 @@ local Initialize = function(Side)
     end
     for i,v in pairs(ArrowGui()[Side].LongNotes:children())do
         if ScrollType(Side)=="Downscroll"then
-            v.ChildAdded:Connect(function(ln)
-                repeat task.wait() until ln.AbsolutePosition.Y-75 >= Y
-                game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[ln.Parent.Name]],false,nil)
-                ln:Destroy() 
+            v.ChildAdded:Connect(function(sustainNote)
+                repeat task.wait() until sustainNote.Visible==false
+                RunSignal(InputService.InputEnded, { KeyCode = Enum.KeyCode[Keys[sustainNote.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
+                sustainNote:Destroy() 
             end)
         else
-            v.ChildAdded:Connect(function(ln)
-                repeat task.wait() until ln.AbsolutePosition.Y+75 <= Y
-                game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[ln.Parent.Name]],false,nil)
-                ln:Destroy() 
+            v.ChildAdded:Connect(function(sustainNote)
+                repeat task.wait() until sustainNote.Visible==false
+                RunSignal(InputService.InputEnded, { KeyCode = Enum.KeyCode[Keys[sustainNote.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
+                sustainNote:Destroy() 
             end)
         end
     end
-    task.spawn(function()
-        repeat wait() until ArrowGui()
-            and ArrowGui():FindFirstChild'Title'
-        and ArrowGui().Title.Text:find'0:01'
-        for i,v in next,Keys do
-            game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[v],false,nil)
-        end
-    end)
 end
 MainGui.ChildAdded:Connect(function(_)
     if _.Name == "ArrowGui" then
@@ -126,4 +111,21 @@ MainGui.ChildAdded:Connect(function(_)
 end)
 if ArrowGui()and Background()then
   Initialize(Side())
+end
+end
+
+function RunSignal(signal, ...)
+    syn.set_thread_identity(2)
+    for _, signal in next, getconnections(signal) do
+        if type(signal.Function) == 'function' and is_lclosure(signal.Function) then
+            local scr = rawget(getfenv(signal.Function), 'script')
+            for _, module in next, getloadedmodules() do
+                if module.Name == 'ConsoleHandler' then
+                    pcall(signal.Function, ...)
+                    break
+                end
+            end 
+        end
+    end
+    syn.set_thread_identity(7)
 end
