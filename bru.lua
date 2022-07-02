@@ -35,7 +35,7 @@ end
 local ArrowGui= function()
   local AG
   for _,v in pairs(MainGui:GetDescendants())do
-    if v.Name == "ArrowGui"then AG=v end
+    if v.Name == "GameUI"then AG=v end
   end
   return AG
 end
