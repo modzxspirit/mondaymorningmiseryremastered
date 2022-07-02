@@ -32,16 +32,16 @@ local Side = function()
         end
     end
 end
-local GameUI= function()
+local ArrowGui= function()
   local AG
   for _,v in pairs(MainGui:GetDescendants())do
-    if v.Name == "GameUI"then AG=v end
+    if v.Name == "ArrowGui"then AG=v end
   end
   return AG
 end
 local FakeContainer=function(sd)
-  if GameUI()~=nil and GameUI():FindFirstChild(sd) then
-    for i,v in next,GameUI()[sd]:GetDescendants()do
+  if ArrowGui()~=nil and ArrowGui():FindFirstChild(sd) then
+    for i,v in next,ArrowGui()[sd]:GetDescendants()do
       if v.Name=='FakeContainer'then return v end
     end
   else
@@ -57,8 +57,8 @@ local ScrollType = function(Side)
     end
 end
 local Initialize = function(Side)
-    repeat wait()until GameUI()
-    local Arrows = GameUI():WaitForChild(Side)
+    repeat wait()until ArrowGui()
+    local Arrows = ArrowGui():WaitForChild(Side)
     repeat wait()until #Arrows:WaitForChild'Notes':children()>0
     repeat wait()until FakeContainer(Side)and Arrows.Notes and #Arrows.Notes:children()>0
     --wait until can be ran
@@ -87,7 +87,7 @@ local Initialize = function(Side)
             end)
         end
     end
-    for i,v in pairs(GameUI()[Side].LongNotes:children())do
+    for i,v in pairs(ArrowGui()[Side].LongNotes:children())do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(sustainNote)
                 repeat task.wait() until sustainNote.Visible==false
@@ -104,12 +104,12 @@ local Initialize = function(Side)
     end
 end
 MainGui.ChildAdded:Connect(function(_)
-    if _.Name == "GameUI" then
-        repeat wait() until GameUI()and Background()
+    if _.Name == "ArrowGui" then
+        repeat wait() until ArrowGui()and Background()
         Initialize(Side())
     end
 end)
-if GameUI()and Background()then
+if ArrowGui()and Background()then
   Initialize(Side())
 end
 end
