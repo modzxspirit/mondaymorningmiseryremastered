@@ -1,4 +1,4 @@
-https://github.com/modzxspirit/mondaymorningmiseryremastered/blob/main/bru.lualocal InputService = game:GetService("UserInputService")
+local InputService = game:GetService("UserInputService")
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/wally-rblx/uwuware-ui/main/main.lua"))() --OMG IP LOGGER!!!!
 local Window = library:CreateWindow("Monday Morning Misery")
 local Folder = Window:AddFolder("Autoplayer") do
