@@ -57,8 +57,8 @@ local ScrollType = function(Side)
     end
 end
 local Initialize = function(Side)
-    repeat wait()until ArrowGui()
-    local Arrows = ArrowGui():WaitForChild(Side)
+    repeat wait()until GameUI()
+    local Arrows = GameUI():WaitForChild(Side)
     repeat wait()until #Arrows:WaitForChild'Notes':children()>0
     repeat wait()until FakeContainer(Side)and Arrows.Notes and #Arrows.Notes:children()>0
     --wait until can be ran
@@ -87,7 +87,7 @@ local Initialize = function(Side)
             end)
         end
     end
-    for i,v in pairs(ArrowGui()[Side].LongNotes:children())do
+    for i,v in pairs(GameUI()[Side].LongNotes:children())do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(sustainNote)
                 repeat task.wait() until sustainNote.Visible==false
@@ -104,12 +104,12 @@ local Initialize = function(Side)
     end
 end
 MainGui.ChildAdded:Connect(function(_)
-    if _.Name == "ArrowGui" then
-        repeat wait() until ArrowGui()and Background()
+    if _.Name == "GameUI" then
+        repeat wait() until GameUI()and Background()
         Initialize(Side())
     end
 end)
-if ArrowGui()and Background()then
+if GameUI()and Background()then
   Initialize(Side())
 end
 end
