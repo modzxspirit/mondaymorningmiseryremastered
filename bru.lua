@@ -87,7 +87,7 @@ local Initialize = function(Side)
             end)
         end
     end
-    for i,v in pairs(ArrowGui()[Side].LongNotes:children())do
+    for i,v in pairs(GameUI()[Side].LongNotes:children())do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(sustainNote)
                 repeat task.wait() until sustainNote.Visible==false
@@ -98,6 +98,22 @@ local Initialize = function(Side)
             v.ChildAdded:Connect(function(sustainNote)
                 repeat task.wait() until sustainNote.Visible==false
                 RunSignal(InputService.InputEnded, { KeyCode = Enum.KeyCode[Keys[sustainNote.Parent.Name]], UserInputType = Enum.UserInputType.Keyboard }, false,nil)
+                    end
+                end
+            end)
+        end
+    end
+    for i,v in pairs(ArrowGui()[Side].LongNotes:children())do
+        if ScrollType(Side)=="Downscroll"then
+            v.ChildAdded:Connect(function(sustainNote)
+                repeat task.wait() until sustainNote.Visible==false
+                game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[sustainNote.Parent.Name]],false,nil)
+                sustainNote:Destroy() 
+            end)
+        else
+            v.ChildAdded:Connect(function(sustainNote)
+                repeat task.wait() until sustainNote.Visible==false
+                game:GetService'VirtualInputManager':SendKeyEvent(false,Enum.KeyCode[Keys[sustainNote.Parent.Name]],false,nil)
                 sustainNote:Destroy() 
             end)
         end
@@ -113,7 +129,6 @@ if ArrowGui()and Background()then
   Initialize(Side())
 end
 end
-
 function RunSignal(signal, ...)
     syn.set_thread_identity(2)
     for _, signal in next, getconnections(signal) do
