@@ -49,7 +49,7 @@ local FakeContainer=function(sd)
 end
 local ScrollType = function(Side)
   repeat wait() until FakeContainer(Side)and #FakeContainer(Side):children()>1000
-    if FakeContainer(Side):children()[1].AbsolutePosition.Y < Client.PlayerGui.ScreenGui.AbsoluteSize.Y/2 then
+    if FakeContainer(Side):children()[1000].AbsolutePosition.Y < Client.PlayerGui.ScreenGui.AbsoluteSize.Y/2 then
         return "Upscroll"
     else
         return "Downscroll"
