@@ -66,7 +66,7 @@ local Initialize = function(Side)
     for i,v in pairs(Arrows.Notes:children())do
         if ScrollType(Side)=="Downscroll"then
             v.ChildAdded:Connect(function(_)
-                repeat task.wait() until _.AbsolutePosition.Y>=Y
+                repeat task.wait() until _.AbsolutePosition.Y>=500
                 if library.flags.AP and Keys[_.Parent.Name]~=nil then
                     game:GetService'VirtualInputManager':SendKeyEvent(true,Enum.KeyCode[Keys[_.Parent.Name]],false,nil)
                     if #Arrows.LongNotes[_.Parent.Name]:children()==0 then 
