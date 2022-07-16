@@ -48,7 +48,7 @@ local FakeContainer=function(sd)
   end
 end
 local ScrollType = function(Side)
-  repeat wait() until FakeContainer(Side)and #FakeContainer(Side):children()>10
+  repeat wait() until FakeContainer(Side)and #FakeContainer(Side):children()>1000
     if FakeContainer(Side):children()[1].AbsolutePosition.Y < Client.PlayerGui.ScreenGui.AbsoluteSize.Y/2 then
         return "Upscroll"
     else
@@ -58,8 +58,8 @@ end
 local Initialize = function(Side)
     repeat wait()until ArrowGui()
     local Arrows = ArrowGui():WaitForChild(Side)
-    repeat wait()until #Arrows:WaitForChild'Notes':children()>10
-    repeat wait()until FakeContainer(Side)and Arrows.Notes and #Arrows.Notes:children()>10
+    repeat wait()until #Arrows:WaitForChild'Notes':children()>1000
+    repeat wait()until FakeContainer(Side)and Arrows.Notes and #Arrows.Notes:children()>1000
     --wait until can be ran
     local Keys = Controls[#Arrows.Notes:children()]
     local Y = FakeContainer(Side).Down.AbsolutePosition.Y
